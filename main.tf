@@ -3,6 +3,13 @@ resource "aws_security_group" "main" {
   description = var.securitygroup_desc
   vpc_id      = var.vpc_id
 
+ #Allows to connect to internet,outbound traffic from SG
+  egress {
+  from_port   = 0
+  to_port     = 0
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+ }
   tags = merge(
     local.common_tags,
    {
